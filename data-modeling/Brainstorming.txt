@@ -1,0 +1,64 @@
+CREATE TABLE users (
+    user_id
+    username
+    password
+    email
+)
+
+CREATE TABLE recipes (
+    recipe_id
+    visible
+    user_id REFERENCES
+    grocery_list_id REFERENCES
+)
+
+CREATE TABLE ingredients (
+    ingredients_id
+    food_amounts
+    recipe_id REFERENCES
+    instructions_id REFERENCES
+)
+
+CREATE TABLE instructions (
+    instructions_id
+    actions
+    recipe_id REFERENCES
+    ingredients_id REFERENCES
+)
+
+CREATE TABLE grocery_list (
+    grocery_list_id
+    food_items
+    user_id REFERENCES
+    recipe_id REFERENCES
+)
+
+CREATE TABLE occasion (
+    occasion_id
+    occasion_type
+    user_id REFERENCES
+    recipe_id REFERENCES
+)
+
+CREATE TABLE post (
+    post_id
+    text
+    user_id REFERENCES
+    recipe_id REFERENCES
+    occasion_id REFERENCES
+)
+
+One-To-One:
+ingredients -> instructions
+post -> recipe
+post -> occasion
+
+One-To-Many:
+user -> post
+user -> recipe_id
+recipe -> ingredients
+recipe -> instructions
+
+Many-To-Many:
+occasion -> recipe
+grocery_list -> recipe
